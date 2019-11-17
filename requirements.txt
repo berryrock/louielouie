@@ -1,0 +1,4 @@
+vedis
+requests==2.7.0
+telebot
+flask
