@@ -1,3 +1,6 @@
 env
 config.py
 database.vdb
+__pycache__
+.DS_Store
+louie.sqlite
