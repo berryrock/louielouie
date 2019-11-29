@@ -1,13 +1,14 @@
 import config
 import requests
-from modules import dbhelper
+from modules.dbhelper import DBhelper
 import json
 from modules.password import generate
 from requests.auth import HTTPBasicAuth
 
+dbhelper = DBhelper()
 
 def dish_info(user, dish):
-	user_acc = dbhelper.get_data(user,"acc")
+	user_acc = dbhelper.get_data(user,"acc")[0]
 	url = config.url + config.region + "user/dish_message/"
 	data = {"dish": dish}
 	answer = requests.get(url, data=data, auth=HTTPBasicAuth(user,user_acc))
@@ -20,7 +21,7 @@ def dish_info(user, dish):
 		return [answer, False]
 
 def exact_dish(user, dish):
-	user_acc = dbhelper.get_data(user,"acc")
+	user_acc = dbhelper.get_data(user,"acc")[0]
 	url = config.url + config.region + "user/dish_message/"
 	data = {"dish": dish, "accepted": True}
 	answer = requests.get(url, data=data, auth=HTTPBasicAuth(user,user_acc))
@@ -33,7 +34,7 @@ def exact_dish(user, dish):
 		return [answer, False]
 
 def user_info(user):
-	user_acc = dbhelper.get_data(user,"acc")
+	user_acc = dbhelper.get_data(user,"acc")[0]
 	url = config.url + config.users + "user/info/"
 	answer = requests.get(url, auth=HTTPBasicAuth(user,user_acc))
 	answer = answer.json()
@@ -54,7 +55,7 @@ def add_user(user):
 
 
 def recomendations(user):
-	user_acc = dbhelper.get_data(user,"acc")
+	user_acc = dbhelper.get_data(user,"acc")[0]
 	url = config.url + config.region + "user/preference_vector/"
 	answer = requests.get(url, auth=HTTPBasicAuth(user,user_acc))
 	answer = answer.json()
@@ -62,7 +63,7 @@ def recomendations(user):
 	return answer["dishes"]
 
 def send_weight(user, weight):
-	user_acc = dbhelper.get_data(user,"acc")
+	user_acc = dbhelper.get_data(user,"acc")[0]
 	url = config.url + config.region + "mealmap/"
 	data = {"weight": weight, "accepted": True}
 	answer = requests.post(url, data=data, auth=HTTPBasicAuth(user,user_acc))
@@ -72,9 +73,9 @@ def send_weight(user, weight):
 
 def send_meal(user, dish):
 	print(dish)
-	user_acc = dbhelper.get_data(user,"acc")
+	user_acc = dbhelper.get_data(user,"acc")[0]
 	url = config.url + config.region + "mealmap/"
-	data = {"dish": dish, "accepted": true}
+	data = {"dish": dish, "accepted": True}
 	answer = requests.post(url, data=data, auth=HTTPBasicAuth(user,user_acc))
 	answer = answer.json()
 	print(answer)
@@ -82,7 +83,7 @@ def send_meal(user, dish):
 
 def update_info(user,type_of_data,value):
 	print('updating')
-	user_acc = dbhelper.get_data(user,"acc")
+	user_acc = dbhelper.get_data(user,"acc")[0]
 	url = config.url + config.users + "user/info/"
 	data = {type_of_data: value}
 	print(data)

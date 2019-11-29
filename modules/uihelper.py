@@ -84,7 +84,7 @@ def about_user(chat,user_info):
 	inline_keyboard.add(weight_button, lenght_button)
 	menu_button = '/main_menu'
 	reply_keyboard.add(menu_button)
-	message = """Name: {}\nBirthday: {}\nWeight: {}\nLenght: {}\n""".format(user_info['name'],user_info['birthday'],user_info['weight'],user_info['lenght'])
+	message = """Name: {}\nBirthday: {}\nWeight: {}\nLenght: {}\n""".format(user_info.get('name', 'Empty'),user_info.get('birthday', 'Empty'),user_info.get('weight', 'Empty'),user_info.get('lenght', 'Empty'))
 	bot.send_message(chat, message, reply_markup=inline_keyboard)
 	bot.send_message(chat, text='More information you add, more personalised recomendations will be', reply_markup=reply_keyboard)
 

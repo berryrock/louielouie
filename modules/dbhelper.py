@@ -1,139 +1,64 @@
-from vedis import Vedis
-import config
-import json
-import ast
+import sqlite3
 
-def add_user(user_id, value):
-	with Vedis(config.db_file) as db:
-		try:
-			try:
-				user_data = db[user_id].decode()
-				print("{} already in database".format(user_id))
-			except:
-				db[user_id] = {"acc": value}
-			return True
-		except:
-			# тут желательно как-то обработать ситуацию
-			print("Can't add user {}".format(user_id))
-			return False
+class DBhelper():
+    def __init__(self, dbname="louie.sqlite"):
+        self.dbname = dbname
+        self.conn = sqlite3.connect(dbname)
 
-def print_user_data(user_id):
-	with Vedis(config.db_file) as db:
-		try:
-			user_data = db[user_id].decode()
-			print(user_data)
-		except:
-			print('Error with {} data'.format(user_id))
+    def setup(self):
+        stmt = "CREATE TABLE IF NOT EXISTS users (user_id, name, weight, lenght, birthday, dish, recomendations, step, acc, call, prev_call, prev_prev_call)"
+        self.conn.execute(stmt)
+        self.conn.commit()
 
+    def add_user(self, user_id, acc):
+        stmt = 'INSERT INTO users (user_id, acc) VALUES (?, ?)'
+        args = (user_id, acc,)
+        self.conn.execute(stmt, args)
+        self.conn.commit()
 
-def set_step(user_id, value):
-	with Vedis(config.db_file) as db:
-		try:
-			data = db[user_id].decode()
-			#print('44444', data)
-			data = data.replace("""'""",'''"''')
-			data = ast.literal_eval(data)
-			data.update({config.UserData.STEP.value: value})
-			db[user_id] = data
-			print("{} Step added".format(value))
-			return True
-		except:
-			# тут желательно как-то обработать ситуацию
-			print("Can't add step for user {}".format(user_id))
-			return False
+    def set_step(self, user_id, step):
+        stmt = 'UPDATE users SET step = "{}" WHERE user_id = {}'.format(step, user_id)
+        self.conn.execute(stmt)
+        self.conn.commit()
 
-def set_call(user_id, value):
-	with Vedis(config.db_file) as db:
-		try:
-			data = db[user_id].decode()
-			#print('44444', data)
-			data = data.replace("""'""",'''"''')
-			data = ast.literal_eval(data)
-			previous_call = data.get(config.UserData.CALL.value, None)
-			previous_previous_call = data.get(config.UserData.PREVIOUS_CALL.value, None)
-			data.update({config.UserData.CALL.value: value, config.UserData.PREVIOUS_CALL.value: previous_call, config.UserData.PREVIOUS_PREVIOUS_CALL.value: previous_previous_call})
-			db[user_id] = data
-			print("{} Call added".format(value))
-			return True
-		except:
-			# тут желательно как-то обработать ситуацию
-			print("Can't add CALL for user {}".format(user_id))
-			return False
+    def get_step(self, user_id):
+        stmt = 'SELECT step FROM users WHERE user_id = "{}"'.format(user_id)
+        return [x[0] for x in self.conn.execute(stmt)]
 
-def get_step(user_id):
-	with Vedis(config.db_file) as db:
-		try:
-			user_data = db[user_id].decode()
-			#print('11111', user_data)
-			user_data = user_data.replace("""'""",'''"''')
-			user_data = ast.literal_eval(user_data)
-			db[user_id] = user_data
-			print("{} Step getted".format(user_data[config.UserData.STEP.value]))
-			return user_data[config.UserData.STEP.value]
-		except:
-			# тут желательно как-то обработать ситуацию
-			return config.Step.MAIN_MENU.value
+    def set_data(self, user_id, type_of_data, value):
+        print('type_of_data', type_of_data)
+        stmt = 'UPDATE users SET {} = "{}" WHERE user_id = "{}"'.format(type_of_data, value, user_id)
+        self.conn.execute(stmt)
+        self.conn.commit()
 
-def get_call(user_id):
-	with Vedis(config.db_file) as db:
-		try:
-			user_data = db[user_id].decode()
-			#print('11111', user_data)
-			user_data = user_data.replace("""'""",'''"''')
-			user_data = ast.literal_eval(user_data)
-			db[user_id] = user_data
-			print("{} CALL getted".format(user_data[config.UserData.STEP.value]))
-			calls = [user_data[config.UserData.CALL.value], user_data[config.UserData.PREVIOUS_CALL.value], user_data[config.UserData.PREVIOUS_PREVIOUS_CALL.value]]
-			return calls
-		except:
-			# тут желательно как-то обработать ситуацию
-			return config.Step.MAIN_MENU.value
+    def get_data(self, user_id, type_of_data):
+        stmt = 'SELECT {} FROM users WHERE user_id = "{}"'.format(type_of_data, user_id)
+        return [x[0] for x in self.conn.execute(stmt)]
 
-def clear_call(user_id):
-	with Vedis(config.db_file) as db:
-		try:
-			data = db[user_id].decode()
-			#print('44444', data)
-			data = data.replace("""'""",'''"''')
-			data = ast.literal_eval(data)
-			previous_call = data.get(config.UserData.CALL.value, None)
-			previous_previous_call = data.get(config.UserData.PREVIOUS_CALL.value, None)
-			data.update({config.UserData.CALL.value: None, config.UserData.PREVIOUS_CALL.value: None, config.UserData.PREVIOUS_PREVIOUS_CALL.value: None})
-			db[user_id] = data
-			print("{} Call added".format(value))
-			return True
-		except:
-			# тут желательно как-то обработать ситуацию
-			print("Can't add CALL for user {}".format(user_id))
-			return False
+    def print_user_data(self, user_id):
+        stmt = 'SELECT * FROM users WHERE user_id = "{}"'.format(user_id)
+        return [x[0] for x in self.conn.execute(stmt)]
 
+    def get_call(self, user_id):
+        stmt = 'SELECT call, prev_call, prev_prev_call FROM users WHERE user_id = "{}"'.format(user_id)
+        calls = [x for x in self.conn.execute(stmt)]
+        calls = list(calls[0])
+        return calls
 
-def set_data(user_id, type_of_data, value):
-	with Vedis(config.db_file) as db:
-		try:
-			data = db[user_id].decode()
-			#print('101010101', data)
-			data = data.replace("""'""",'''"''')
-			data = ast.literal_eval(data)
-			data.update({type_of_data: value})
-			db[user_id] = data
-			print("{} added".format(type_of_data))
-			return True
-		except:
-			# тут желательно как-то обработать ситуацию
-			print("Can't add {} for user {}".format(type_of_data,user_id))
-			return False
+    def set_call(self, user_id, value):
+        previous_calls = self.get_call(user_id)
+        print('setting calls', 'previous:', previous_calls, 'actual', value)
+        if len(previous_calls) < 1:
+            previous_calls = ['Empty', 'Empty']
+        elif len(previous_calls) < 2:
+            previous_calls.append('Empty')
+        print('previous updated', previous_calls)
+        stmt = 'UPDATE users SET call = "{}", prev_call = "{}", prev_prev_call = "{}" WHERE user_id = "{}"'.format(value, previous_calls[0], previous_calls[1], user_id)
+        print(stmt)
+        self.conn.execute(stmt)
+        self.conn.commit()
 
-def get_data(user_id, type_of_data):
-	with Vedis(config.db_file) as db:
-		try:
-			user_data = db[user_id].decode()
-			#print('777777777', user_data)
-			user_data = user_data.replace("""'""",'''"''')
-			user_data = ast.literal_eval(user_data)
-			db[user_id] = user_data
-			#print(user_data)
-			print("{} getted".format(type_of_data))
-			return user_data[type_of_data]
-		except:
-			print('Cant return user data {}'.format(type_of_data))
+    def clear_call(self, user_id):
+        stmt = 'UPDATE users SET call = "", prev_call = "", prev_prev_call = "" WHERE user_id = "{}"'.format(user_id)
+        self.conn.execute(stmt)
+        self.conn.commit()
