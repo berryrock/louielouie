@@ -16,6 +16,10 @@ def dish_info(user, dish):
 	print(answer)
 	try:
 		dish = answer["dish"]
+		if dish["message"] = "No message to display":
+			dish.update({"message":"Нет сообщения для показа"})
+		elif "not found in database." in dish["message"]:
+			dish.update({"message":"Не найдено в базе данных. Мы обязательно добавим его"})
 		return [answer, True]
 	except KeyError:
 		return [answer, False]
