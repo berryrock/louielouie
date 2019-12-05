@@ -329,6 +329,7 @@ def callback_inline(call):
 
 			elif call.data == config.Step.DIET_ON.value:
 				dbhelper.set_step(call.message.chat.id, config.Step.ABOUT.value)
+				backend.user_diet(call.message.chat.id,config.Step.DIET_ON.value)
 				uihelper.diet_on(call.message.chat.id)
 				user_info = backend.user_info(call.message.chat.id)
 				user_name = user_info.get('name', 'Empty')
@@ -343,6 +344,7 @@ def callback_inline(call):
 
 			elif call.data == config.Step.DIET_OFF.value:
 				dbhelper.set_step(call.message.chat.id, config.Step.ABOUT.value)
+				backend.user_diet(call.message.chat.id,config.Step.DIET_OFF.value)
 				uihelper.diet_off(call.message.chat.id)
 				user_info = backend.user_info(call.message.chat.id)
 				user_name = user_info.get('name', 'Empty')
