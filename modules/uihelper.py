@@ -85,9 +85,24 @@ def about_user(chat,user_info):
 	inline_keyboard.add(weight_button, lenght_button)
 	menu_button = '/main_menu'
 	reply_keyboard.add(menu_button)
-	message = translation["rus"].text_about_user.format(user_info.get('name', 'Empty'),user_info.get('birthday', 'Empty'),user_info.get('weight', 'Empty'),user_info.get('lenght', 'Empty'))
+	user_diets = user_info.get('diets', None)
+	if len(user_diets) < 1:
+		message = translation["rus"].text_about_user.format(user_info.get('name', 'Empty'),user_info.get('birthday', 'Empty'),user_info.get('weight', 'Empty'),user_info.get('lenght', 'Empty'))
+		diet_button = types.InlineKeyboardButton(text=translation["rus"].button_turn_on_diet, callback_data=config.Step.DIET_ON.value)
+	else:
+		message = translation["rus"].text_about_user.format(user_info.get('name', 'Empty'),user_info.get('birthday', 'Empty'),user_info.get('weight', 'Empty'),user_info.get('lenght', 'Empty'))
+		diet_button = types.InlineKeyboardButton(text=translation["rus"].button_turn_off_diet, callback_data=config.Step.DIET_OFF.value)
+	inline_keyboard.add(diet_button)
 	bot.send_message(chat, message, reply_markup=inline_keyboard)
 	bot.send_message(chat, text=translation["rus"].text_more_inforamtion_add, reply_markup=reply_keyboard)
+
+def diet_on(chat):
+	message = translation["rus"].text_diet_on
+	bot.send_message(chat, message)
+
+def diet_off(chat):
+	message = translation["rus"].text_diet_off
+	bot.send_message(chat, message)
 
 def recomendations(chat,recomendations):
 	reply_keyboard = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)

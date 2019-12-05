@@ -11,6 +11,8 @@ class Message():
     button_edit_lenght = "Edit lenght"
     button_private_policy = "Private Policy"
     button_accept_policy = "I accept private policy"
+    button_turn_on_diet = "High cholesterol diet: TURN ON"
+    button_turn_off_diet = "High cholesterol diet: TURN OFF"
 
     main_menu = "/main_menu"
     weight = "/weight"
@@ -40,6 +42,8 @@ class Message():
     text_welcome = "Thank you for interest for the project. Hope your enjoy it"
     text_spamming = "Looks like you are spamming. Just don't"
     text_error = 'Something went wrong.\nTry again later or write your problem to @berryrock'
+    text_diet_on = "High cholesterol diet turned on"
+    text_diet_off = "High cholesterol diet turned off"
 
 class RussianTranslation(Message):
     language = "Русский"
@@ -54,6 +58,8 @@ class RussianTranslation(Message):
     button_edit_lenght = "Редактировать рост"
     button_private_policy = "Политика конфиденциальности"
     button_accept_policy = "Я принимаю политику конфиденциальности"
+    button_turn_on_diet = "Диета при высоком холестерине: ВКЛЮЧИТЬ"
+    button_turn_off_diet = "Диета при высоком холестерине: ВЫКЛЮЧИТЬ"
 
     text_meal_info = "Запишите, что съели это блюдо или выберите другое"
     text_loading = "Обновляю данные, пожалуйста, подождите..."
@@ -77,6 +83,8 @@ class RussianTranslation(Message):
     text_welcome = "Спасибо за проявленный инетрес к проекту. Надеюсь, он Вам понравится"
     text_spamming = "Похоже, вы спамите. Пожалуй, не стоит."
     text_error = 'Что-то пошло не так\nПопробуйте еще раз позже или напишите свою проблему @berryrock'
+    text_diet_on = "Диета при высоком холестерине включена"
+    text_diet_off = "Диета при высоком холестерине выключена"
 
 russian = RussianTranslation()
 translation = {"rus": russian}

@@ -327,6 +327,34 @@ def callback_inline(call):
 				dbhelper.set_step(call.message.chat.id, config.Step.ABOUT_BIRTH.value)
 				uihelper.edit_personal(call.message.chat.id, 'birth')
 
+			elif call.data == config.Step.DIET_ON.value:
+				dbhelper.set_step(call.message.chat.id, config.Step.ABOUT.value)
+				uihelper.diet_on(message.chat.id)
+				user_info = backend.user_info(message.chat.id)
+				user_name = user_info.get('name', 'Empty')
+				user_weight = user_info.get('weight', 'Empty')
+				user_lenght = user_info.get('lenght', 'Empty')
+				user_birth = user_info.get('birthday', 'Empty')
+				dbhelper.set_data(message.chat.id, config.UserData.NAME.value, user_name)
+				dbhelper.set_data(message.chat.id, config.UserData.WEIGHT.value, user_weight)
+				dbhelper.set_data(message.chat.id, config.UserData.LENGHT.value, user_lenght)
+				dbhelper.set_data(message.chat.id, config.UserData.BIRTH.value, user_birth)
+				uihelper.about_user(message.chat.id, user_info)
+
+			elif call.data == config.Step.DIET_OFF.value:
+				dbhelper.set_step(call.message.chat.id, config.Step.ABOUT.value)
+				uihelper.diet_off(message.chat.id)
+				user_info = backend.user_info(message.chat.id)
+				user_name = user_info.get('name', 'Empty')
+				user_weight = user_info.get('weight', 'Empty')
+				user_lenght = user_info.get('lenght', 'Empty')
+				user_birth = user_info.get('birthday', 'Empty')
+				dbhelper.set_data(message.chat.id, config.UserData.NAME.value, user_name)
+				dbhelper.set_data(message.chat.id, config.UserData.WEIGHT.value, user_weight)
+				dbhelper.set_data(message.chat.id, config.UserData.LENGHT.value, user_lenght)
+				dbhelper.set_data(message.chat.id, config.UserData.BIRTH.value, user_birth)
+				uihelper.about_user(message.chat.id, user_info)
+
 			else:
 				dbhelper.set_step(call.message.chat.id, config.Step.MAIN_MENU.value)
 				uihelper.error_message(call.message.chat.id)

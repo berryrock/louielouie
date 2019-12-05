@@ -45,6 +45,23 @@ def user_info(user):
 	print(answer)
 	return answer
 
+def user_diet(user,status):
+	user_acc = dbhelper.get_data(user,"acc")[0]
+	url = config.url + config.users + "user/diet/"
+	data = {"id": 1}
+	if status == config.DIET_ON:
+		answer = requests.put(url, data=data, auth=HTTPBasicAuth(user,user_acc))
+		answer = answer.json()
+		print(answer)
+		return True
+	elif status == config.DIET_OFF:
+		answer = requests.delete(url, data=data, auth=HTTPBasicAuth(user,user_acc))
+		answer = answer.json()
+		print(answer)
+		return True
+	else:
+		print(answer)
+		return False
 
 def add_user(user):
 	url = config.url + config.users + "user/create/telegram/"
