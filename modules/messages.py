@@ -78,7 +78,7 @@ class RussianTranslation(Message):
     text_enter_info = "Введите {}"
     text_wrong_birthday_format = "Неверный формат\nВведите дату в формате: 14.11.2019"
     text_updated_info = "{} обновлено"
-    text_hello = "Hi!\nI'm Louie-Louie personal nutrition assistant.\nI was developed by @berryrock to demostrate possibilities of Mealmapp, food management platform."
+    text_hello = "Привет!\nЯ Louie-Louie персональный ассистент питания.\nЯ был разработан для демонстрации возможностей платформы Mealmapp. Создатель @berryrock"
     text_accept_policy = "Примите политику конфиденциальности, чтобы продолжить"
     text_welcome = "Спасибо за проявленный инетрес к проекту. Надеюсь, он Вам понравится"
     text_spamming = "Похоже, вы спамите. Пожалуй, не стоит."
