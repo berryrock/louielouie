@@ -242,7 +242,7 @@ def answer_to_user(message):
 			uihelper.main_menu(message.chat.id)
 
 	except IndexError:
-		if message.text == config.Step.START_ACCEPT.value:
+		if message.text == config.Step.START_ACCEPT.value or message.text == config.Step.START_ACCEPT_RU.value:
 			backend.add_user(message.chat.id)
 			dbhelper.set_step(message.chat.id, config.Step.MAIN_MENU.value)
 			uihelper.welcome_message(message.chat.id)
