@@ -141,15 +141,17 @@ def answer_to_user(message):
 	print()
 	print('text', message.chat.id)
 	print(str(datetime.datetime.now()), message.text)
-	step = dbhelper.get_step(message.chat.id)[0]
-	dbhelper.clear_call(message.chat.id)
 	try:
+		step = dbhelper.get_step(message.chat.id)[0]
+	except IndexError:
 		if message.text == config.Step.START_ACCEPT.value:
 			backend.add_user(message.chat.id)
+			dbhelper.set_step(message.chat.id, config.Step.MAIN_MENU.value)
 			uihelper.welcome_message(message.chat.id)
 			uihelper.main_menu(message.chat.id)
-
-		elif step == config.Step.MAIN_MENU.value:
+	dbhelper.clear_call(message.chat.id)
+	try:
+		if step == config.Step.MAIN_MENU.value:
 			if message.text == "test_user_data":
 				dbhelper.print_user_data(message.chat.id)
 			else:
@@ -234,6 +236,10 @@ def answer_to_user(message):
 	except KeyError:
 		dbhelper.set_step(message.chat.id, config.Step.MAIN_MENU.value)
 		uihelper.error_message(message.chat.id)
+		uihelper.main_menu(message.chat.id)
+
+	except IndexError:
+		dbhelper.set_step(message.chat.id, config.Step.MAIN_MENU.value)
 		uihelper.main_menu(message.chat.id)
 
 	except JSONDecodeError:
