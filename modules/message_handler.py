@@ -1,10 +1,11 @@
 import config
+from json.decoder import JSONDecodeError
 
 def message_handler(message, dbhelper, uihelper, backend):
     try:
         step = dbhelper.get_step(message.chat.id)[0]
         dbhelper.clear_call(message.chat.id)
-        
+
         if message.text == config.Menu_RU.MAIN_MENU.value:
             dbhelper.set_step(message.chat.id, config.Step.MAIN_MENU.value)
             uihelper.main_menu(message.chat.id)

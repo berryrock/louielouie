@@ -13,6 +13,11 @@ from modules.dbhelper import DBhelper
 
 from modules.message_handler import message_handler
 
+from json.decoder import JSONDecodeError
+
+from modules import uihelper, backend
+import datetime
+
 dbhelper = DBhelper()
 
 API_TOKEN = config.token
@@ -46,10 +51,6 @@ def webhook():
 	else:
 		flask.abort(403)
 
-from json.decoder import JSONDecodeError
-
-from modules import uihelper, backend
-import datetime
 
 @bot.message_handler(commands=["start"])
 def cmd_start(message):
