@@ -11,6 +11,8 @@ import config
 
 from modules.dbhelper import DBhelper
 
+from modules.message_handler import message_handler
+
 dbhelper = DBhelper()
 
 API_TOKEN = config.token
@@ -135,13 +137,13 @@ def cmd_menu(message):
 
 
 
-
 @bot.message_handler(content_types=['text'])
 def answer_to_user(message):
 	print()
 	print('text', message.chat.id)
 	print(str(datetime.datetime.now()), message.text)
 	message_handler(message, dbhelper, uihelper, backend)
+
 
 
 @bot.callback_query_handler(func=lambda call: True)
