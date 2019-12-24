@@ -20,7 +20,7 @@ def meal_info(chat, dish_info):
 			inline_keyboard.add(link_button)
 	except KeyError:
 		pass
-	menu_button = '/main_menu'
+	menu_button = config.Menu_RU.MAIN_MENU.value
 	reply_keyboard.add(menu_button)
 	message = '{}\n\n{}'.format(dish_info['dish'],dish_info['message'])
 	bot.send_message(chat, message, reply_markup=inline_keyboard)
@@ -57,7 +57,7 @@ def enter_meal(chat):
 
 def main_menu(chat):
 	reply_keyboard = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
-	buttons = ['/meal','/recomendations','/weight','/about_you']
+	buttons = [config.Menu_RU.MEAL.value,config.Menu_RU.RECOMENDATIONS.value,config.Menu_RU.WEIGHT.value,config.Menu_RU.ABOUT.value]
 	for button in buttons:
 		reply_keyboard.add(button)
 	message = translation["rus"].text_main_menu
@@ -83,7 +83,7 @@ def about_user(chat,user_info):
 	lenght_button = types.InlineKeyboardButton(text=translation["rus"].button_edit_lenght, callback_data=config.Step.ABOUT_LENGHT.value)
 	inline_keyboard.add(name_button, birth_button)
 	inline_keyboard.add(weight_button, lenght_button)
-	menu_button = '/main_menu'
+	menu_button = config.Menu_RU.MAIN_MENU.value
 	reply_keyboard.add(menu_button)
 	user_diets = user_info.get('diets', None)
 	if len(user_diets) < 1:
@@ -107,7 +107,7 @@ def diet_off(chat):
 def recomendations(chat,recomendations):
 	reply_keyboard = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
 	if recomendations == '':
-		menu_button = '/main_menu'
+		menu_button = config.Menu_RU.MAIN_MENU.value
 		reply_keyboard.add(menu_button)
 		message = translation["rus"].text_eat_too_much
 	else:
@@ -127,7 +127,7 @@ def edit_personal(chat, type_of_info):
 	inline_keyboard = types.InlineKeyboardMarkup()
 	menu_button = types.InlineKeyboardButton(text=translation["rus"].button_back_main_menu, callback_data=config.Step.MAIN_MENU.value)
 	inline_keyboard.add(menu_button)
-	message = translation["rus"].text_enter_info.format(type_of_info)
+	message = translation["rus"].text_enter_info.format(translation["rus"].edit_personal.get("type_of_info",""))
 	bot.send_message(chat, message, reply_markup=inline_keyboard)
 
 def wrong_data_format(chat):
@@ -139,7 +139,7 @@ def wrong_data_format(chat):
 
 
 def updated_user(chat, type_of_info):
-	message = translation["rus"].text_updated_info.format(type_of_info)
+	message = translation["rus"].text_updated_info.format(translation["rus"].edit_personal.get("type_of_info",""))
 	bot.send_message(chat, message)
 
 def first_step(chat):

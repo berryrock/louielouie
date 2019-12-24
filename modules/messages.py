@@ -45,6 +45,8 @@ class Message():
     text_diet_on = "High cholesterol diet turned on"
     text_diet_off = "High cholesterol diet turned off"
 
+    edit_personal = {"weight": "weight", "lenght": "lenght", "birthday": "birthday", "name": "name"}
+
 class RussianTranslation(Message):
     language = "Русский"
 
@@ -85,6 +87,8 @@ class RussianTranslation(Message):
     text_error = 'Что-то пошло не так\nПопробуйте еще раз позже или напишите свою проблему @berryrock'
     text_diet_on = "Диета при высоком холестерине включена"
     text_diet_off = "Диета при высоком холестерине выключена"
+
+    edit_personal = {"weight": "вес", "lenght": "рост", "birthday": "день рождения", "name": "имя"}
 
 russian = RussianTranslation()
 translation = {"rus": russian}
