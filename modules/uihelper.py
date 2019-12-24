@@ -127,7 +127,7 @@ def edit_personal(chat, type_of_info):
 	inline_keyboard = types.InlineKeyboardMarkup()
 	menu_button = types.InlineKeyboardButton(text=translation["rus"].button_back_main_menu, callback_data=config.Step.MAIN_MENU.value)
 	inline_keyboard.add(menu_button)
-	message = translation["rus"].text_enter_info.format(translation["rus"].edit_personal.get("type_of_info",""))
+	message = translation["rus"].text_enter_info.format(translation["rus"].edit_personal.get(type_of_info,""))
 	bot.send_message(chat, message, reply_markup=inline_keyboard)
 
 def wrong_data_format(chat):
@@ -139,7 +139,7 @@ def wrong_data_format(chat):
 
 
 def updated_user(chat, type_of_info):
-	message = translation["rus"].text_updated_info.format(translation["rus"].edit_personal.get("type_of_info",""))
+	message = translation["rus"].text_updated_info.format(translation["rus"].edit_personal.get(type_of_info,""))
 	bot.send_message(chat, message)
 
 def first_step(chat):
