@@ -9,12 +9,14 @@ def message_handler(message, dbhelper, uihelper, backend):
         if message.text == config.Menu_RU.MAIN_MENU.value:
             dbhelper.set_step(message.chat.id, config.Step.MAIN_MENU.value)
             uihelper.main_menu(message.chat.id)
+
         elif message.text == config.Menu_RU.RECOMENDATIONS.value:
             dbhelper.set_step(message.chat.id, config.Step.MEAL.value)
             uihelper.loading(message.chat.id)
             recomendations = backend.recomendations(message.chat.id)
             dbhelper.set_data(message.chat.id, config.UserData.RECOMENDATIONS.value, recomendations)
             uihelper.recomendations(message.chat.id, recomendations)
+
         elif message.text == config.Menu_RU.MEAL.value:
             dbhelper.set_step(message.chat.id, config.Step.MEAL.value)
             uihelper.enter_meal(message.chat.id)
@@ -41,6 +43,10 @@ def message_handler(message, dbhelper, uihelper, backend):
                 if step == config.Step.MAIN_MENU.value:
                     if message.text == "test_user_data":
                         dbhelper.print_user_data(message.chat.id)
+
+                    elif message.text == config.Step.START_ACCEPT.value or message.text == config.Step.START_ACCEPT_RU.value:
+                        print('NEW USER', message.chat.id)
+
                     else:
                         dish_info = backend.dish_info(message.chat.id, message.text)
                         dbhelper.set_data(message.chat.id, config.UserData.DISH.value, message.text)
