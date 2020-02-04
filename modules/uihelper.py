@@ -144,9 +144,10 @@ def updated_user(chat, type_of_info):
 
 def settings(chat, settings):
 	inline_keyboard = types.InlineKeyboardMarkup()
-	if settings["notification"]:
-		notification_button = types.InlineKeyboardButton(text=translation["rus"].button_notication_off, callback_data=config.Step.NOTIFICATION_OFF.value)
-	else:
+	try:
+		if settings["notification"]:
+			notification_button = types.InlineKeyboardButton(text=translation["rus"].button_notication_off, callback_data=config.Step.NOTIFICATION_OFF.value)
+	except KeyError:
 		notification_button = types.InlineKeyboardButton(text=translation["rus"].button_notication_on, callback_data=config.Step.NOTIFICATION_ON.value)
 	inline_keyboard.add(notification_button)
 	message = translation["rus"].text_settings
