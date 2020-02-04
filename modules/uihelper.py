@@ -150,9 +150,10 @@ def settings(chat, settings):
 		notification_button = types.InlineKeyboardButton(text=translation["rus"].button_notication_on, callback_data=config.Step.NOTIFICATION_ON.value)
 	inline_keyboard.add(notification_button)
 	message = translation["rus"].text_settings
-	if settings["gmail_account"]:
-		gmail_button = types.InlineKeyboardButton(text=translation["rus"].button_gmail_off, callback_data=config.Step.GMAIL_OFF.value)
-	else:
+	try:
+		if settings["gmail_account"]:
+			gmail_button = types.InlineKeyboardButton(text=translation["rus"].button_gmail_off, callback_data=config.Step.GMAIL_OFF.value)
+	except KeyError:
 		gmail_button = types.InlineKeyboardButton(text=translation["rus"].button_gmail_on, url=config.google_connect_url.format(chat))
 		message = message + "\n\n" + translation["rus"].text_connect_gmail
 	inline_keyboard.add(gmail_button)
