@@ -155,10 +155,11 @@ def clear_gmail(user):
 		answer = answer.json()
 		print(answer)
 		settings = {"notification": answer.get("notification",None)}
-		connected_accounts = answer.get("connected_accounts", None)
-		for account in connected_accounts:
-			if account['name'] == "Gmail":
-				settings.update({"gmail_account": True})
-			elif ccount['name'] == "WiThings":
-				settings.update({"withings": True})
+		update_connected_accounts = answer.get("connected_accounts", None)
+		if update_connected_accounts:
+			for account in connected_accounts:
+				if account['name'] == "Gmail":
+					settings.update({"gmail_account": True})
+				elif ccount['name'] == "WiThings":
+					settings.update({"withings": True})
 	return answer
