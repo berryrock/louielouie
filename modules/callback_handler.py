@@ -3,7 +3,7 @@ from json.decoder import JSONDecodeError
 
 def callback_handler(call, dbhelper, uihelper, backend):
     step = dbhelper.get_step(call.message.chat.id)[0]
-    print(str(datetime.datetime.now()), step)
+    print(step)
     previous_calls = dbhelper.get_call(call.message.chat.id)
     print('previous calls', previous_calls)
     if len(previous_calls) < 3:
