@@ -160,7 +160,7 @@ def settings(chat, settings):
 	bot.send_message(chat, message, reply_markup=inline_keyboard)
 	reply_keyboard = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
 	message_two = translation["rus"].text_connected_services
-	menu_button = types.InlineKeyboardButton(text=translation["rus"].button_back_main_menu, callback_data=config.Step.MAIN_MENU.value)
+	menu_button = config.Menu_RU.MAIN_MENU.value
 	reply_keyboard.add(menu_button)
 	bot.send_message(chat, message_two, reply_markup=reply_keyboard)
 
