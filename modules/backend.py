@@ -123,9 +123,9 @@ def user_settings(user):
 	connected_accounts = answer.get("connected_accounts", None)
 	if connected_accounts:
 		for account in connected_accounts:
-			if account == 1:
+			if account['name'] == "Gmail":
 				settings.update({"gmail_account": True})
-			elif account == 2:
+			elif ccount['name'] == "WiThings":
 				settings.update({"withings": True})
 	return settings
 
@@ -143,11 +143,11 @@ def notifications_turn(user, status):
 
 def clear_gmail(user, settings):
 	connected_accounts = settings.pop('connected_accounts')
-	connected_accounts.remove(1)
+	connected_accounts.remove(config.GMAIL_SERVICE)
 	user_acc = dbhelper.get_data(user,"acc")[0]
 	url = config.url + config.users + "user/connected_service/"
 	data = {"connected_accounts": connected_accounts}
-	answer = requests.delete(url, data=data, auth=HTTPBasicAuth(user,user_acc))
+	answer = requests.put(url, data=data, auth=HTTPBasicAuth(user,user_acc))
 	answer = answer.json()
 	print(answer)
 	return answer
