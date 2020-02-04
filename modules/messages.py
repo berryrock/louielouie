@@ -50,7 +50,7 @@ class Message():
     text_error = 'Something went wrong.\nTry again later or write your problem to @berryrock'
     text_diet_on = "High cholesterol diet turned on"
     text_diet_off = "High cholesterol diet turned off"
-    text_setting = "Set up your settings"
+    text_settings = "Set up your settings"
     text_notification_update = "Notification status updated"
     text_gmail_update = "Gmail account deleted"
     text_connect_gmail = "Connect your Gmail account for automatical collection of your meals from food delivery services"
@@ -103,7 +103,7 @@ class RussianTranslation(Message):
     text_error = 'Что-то пошло не так\nПопробуйте еще раз позже или напишите свою проблему @berryrock'
     text_diet_on = "Диета при высоком холестерине включена"
     text_diet_off = "Диета при высоком холестерине выключена"
-    text_setting = "Ваши настройки"
+    text_settings = "Ваши настройки"
     text_notification_update = "Статус уведомлений обновлен"
     text_gmail_update = "Gmail аккаунт удален"
     text_connect_gmail = "Подключите ваш Gmail аккаунт, чтобы информацию о заказах из сервисов доставки добавлялась автоматически"
