@@ -142,12 +142,23 @@ def notifications_turn(user, status):
 	return answer
 
 def clear_gmail(user, settings):
-	connected_accounts = settings.pop('connected_accounts')
-	connected_accounts.remove(config.GMAIL_SERVICE)
 	user_acc = dbhelper.get_data(user,"acc")[0]
-	url = config.url + config.users + "user/connected_service/"
-	data = {"connected_accounts": connected_accounts}
-	answer = requests.put(url, data=data, auth=HTTPBasicAuth(user,user_acc))
+	url_info = config.url + config.users + "user/info/"
+	answer = requests.get(url_info, auth=HTTPBasicAuth(user,user_acc))
 	answer = answer.json()
-	print(answer)
+	connected_accounts = answer.get('connected_accounts', None)
+	if connected_accounts:
+		connected_accounts.remove(config.GMAIL_SERVICE)
+		url = config.url + config.users + "user/connected_service/"
+		data = {"connected_accounts": connected_accounts}
+		answer = requests.put(url, data=data, auth=HTTPBasicAuth(user,user_acc))
+		answer = answer.json()
+		print(answer)
+		settings = {"notification": answer.get("notification",None)}
+		connected_accounts = answer.get("connected_accounts", None)
+		for account in connected_accounts:
+			if account['name'] == "Gmail":
+				settings.update({"gmail_account": True})
+			elif ccount['name'] == "WiThings":
+				settings.update({"withings": True})
 	return answer
