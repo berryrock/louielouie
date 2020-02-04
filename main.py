@@ -12,7 +12,7 @@ import config
 from modules.dbhelper import DBhelper
 
 from modules.message_handler import message_handler
-from modules.call_handler import callback_handler
+from modules.callback_handler import callback_handler
 
 from json.decoder import JSONDecodeError
 
