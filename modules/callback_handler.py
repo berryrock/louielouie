@@ -58,7 +58,7 @@ def callback_handler(call, dbhelper, uihelper, backend):
 
             elif call.data == config.Step.RECOMENDATIONS_REFRESH.value:
                 dbhelper.set_step(call.message.chat.id, config.Step.MEAL.value)
-                recomendations = backend.recomendations(message.chat.id)
+                recomendations = backend.recomendations(call.message.chat.id)
                 dbhelper.set_data(call.message.chat.id, config.UserData.RECOMENDATIONS.value, recomendations)
                 uihelper.recomendations(call.message.chat.id)
 
@@ -117,21 +117,21 @@ def callback_handler(call, dbhelper, uihelper, backend):
                 backend.notifications_turn(call.message.chat.id, config.Step.NOTIFICATION_ON.value)
                 uihelper.notification_update(call.message.chat.id)
                 settings = backend.user_settings(call.message.chat.id)
-                uihelper.settings(message.chat.id, settings)
+                uihelper.settings(call.message.chat.id, settings)
 
             elif call.data == config.Step.NOTIFICATION_OFF.value:
                 dbhelper.set_step(call.message.chat.id, config.Step.SETTINGS.value)
                 backend.notifications_turn(call.message.chat.id, config.Step.NOTIFICATION_OFF.value)
                 uihelper.notification_update(call.message.chat.id)
                 settings = backend.user_settings(call.message.chat.id)
-                uihelper.settings(message.chat.id, settings)
+                uihelper.settings(call.message.chat.id, settings)
 
             elif call.data == config.Step.GMAIL_OFF.value:
                 dbhelper.set_step(call.message.chat.id, config.Step.SETTINGS.value)
                 settings = backend.user_settings(call.message.chat.id)
                 settings = backend.clear_gmail(call.message.chat.id, settings)
                 uihelper.gmail_update(call.message.chat.id)
-                uihelper.settings(message.chat.id, settings)
+                uihelper.settings(call.message.chat.id, settings)
 
             else:
                 dbhelper.set_step(call.message.chat.id, config.Step.MAIN_MENU.value)

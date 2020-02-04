@@ -156,6 +156,8 @@ def settings(chat, settings):
 		gmail_button = types.InlineKeyboardButton(text=translation["rus"].button_gmail_on, url=config.google_connect_url.format(chat))
 		message = message + "\n\n" + translation["rus"].text_connect_gmail
 	inline_keyboard.add(gmail_button)
+	menu_button = types.InlineKeyboardButton(text=translation["rus"].button_back_main_menu, callback_data=config.Step.MAIN_MENU.value)
+	inline_keyboard.add(menu_button)
 	bot.send_message(chat, message, reply_markup=inline_keyboard)
 
 def notification_update(chat):
