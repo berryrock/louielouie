@@ -118,7 +118,7 @@ def recomendations(chat,recomendations):
 			n += 1
 			if n == 6:
 				break
-		menu_button = '/main_menu'
+		menu_button = config.Menu_RU.MAIN_MENU.value
 		reply_keyboard.add(menu_button)
 		message = translation["rus"].text_recomended_dishes
 	bot.send_message(chat, message, reply_markup=reply_keyboard)
@@ -142,9 +142,33 @@ def updated_user(chat, type_of_info):
 	message = translation["rus"].text_updated_info.format(translation["rus"].edit_personal.get(type_of_info,""))
 	bot.send_message(chat, message)
 
+def settings(chat, settings):
+	inline_keyboard = types.InlineKeyboardMarkup()
+	if settings["notification"]:
+		notification_button = types.InlineKeyboardButton(text=translation["rus"].button_notication_off, callback_data=config.Step.NOTIFICATION_OFF.value)
+	else:
+		notification_button = types.InlineKeyboardButton(text=translation["rus"].button_notication_on, callback_data=config.Step.NOTIFICATION_ON.value)
+	reply_keyboard.add(notification_button)
+	message = translation["rus"].text_settings
+	if settings["gmail_account"]:
+		gmail_button = types.InlineKeyboardButton(text=translation["rus"].button_gmail_off, callback_data=config.Step.GMAIL_OFF.value)
+	else:
+		gmail_button = types.InlineKeyboardButton(text=translation["rus"].button_gmail_on, url=config.google_connect_url.format(chat))
+		message = message + "\n\n" + translation["rus"].text_connect_gmail
+	reply_keyboard.add(gmail_button)
+	bot.send_message(chat, message, reply_markup=inline_keyboard)
+
+def notification_update(chat):
+	message = translation["rus"].text_notification_update
+	bot.send_message(chat, message)
+
+def gmail_update(chat):
+	message = translation["rus"].text_gmail_update
+	bot.send_message(chat, message)
+
 def first_step(chat):
 	inline_keyboard = types.InlineKeyboardMarkup()
-	policy_button = add_button = types.InlineKeyboardButton(text=translation["rus"].button_private_policy, url='http://www.mealmapp.ru/private-policy/')
+	policy_button = types.InlineKeyboardButton(text=translation["rus"].button_private_policy, url='http://www.mealmapp.ru/private-policy/')
 	inline_keyboard.add(policy_button)
 	reply_keyboard = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
 	accept_button = translation["rus"].button_accept_policy

@@ -13,6 +13,12 @@ class Message():
     button_accept_policy = "I accept private policy"
     button_turn_on_diet = "High cholesterol diet: TURN ON"
     button_turn_off_diet = "High cholesterol diet: TURN OFF"
+    button_notication_on = "Turn ON notifications"
+    button_notication_off = "Turn OFF notifications"
+    button_gmail_on = "Connect Gmail account"
+    button_gmail_off = "Disconnect Gmail account"
+    button_withings_on = "Connect WiThings account"
+    button_withings_off = "Disconnect WiThings account"
 
     main_menu = "/main_menu"
     weight = "/weight"
@@ -44,6 +50,10 @@ class Message():
     text_error = 'Something went wrong.\nTry again later or write your problem to @berryrock'
     text_diet_on = "High cholesterol diet turned on"
     text_diet_off = "High cholesterol diet turned off"
+    text_setting = "Set up your settings"
+    text_notification_update = "Notification status updated"
+    text_gmail_update = "Gmail account deleted"
+    text_connect_gmail = "Connect your Gmail account for automatical collection of your meals from food delivery services"
 
     edit_personal = {"weight": "weight", "lenght": "lenght", "birthday": "birthday", "name": "name"}
 
@@ -62,6 +72,12 @@ class RussianTranslation(Message):
     button_accept_policy = "Я принимаю политику конфиденциальности"
     button_turn_on_diet = "Диета при высоком холестерине: ВКЛЮЧИТЬ"
     button_turn_off_diet = "Диета при высоком холестерине: ВЫКЛЮЧИТЬ"
+    button_notication_on = "Включить уведомления"
+    button_notication_off = "Выключить уведомления"
+    button_gmail_on = "Подключить Gmail аккаунт"
+    button_gmail_off = "Отключить Gmail аккаунт"
+    button_withings_on = "Подключить WiThings аккаунт"
+    button_withings_off = "Отключить WiThings аккаунт"
 
     text_meal_info = "Запишите, что съели это блюдо или выберите другое"
     text_loading = "Обновляю данные, пожалуйста, подождите..."
@@ -87,6 +103,10 @@ class RussianTranslation(Message):
     text_error = 'Что-то пошло не так\nПопробуйте еще раз позже или напишите свою проблему @berryrock'
     text_diet_on = "Диета при высоком холестерине включена"
     text_diet_off = "Диета при высоком холестерине выключена"
+    text_setting = "Ваши настройки"
+    text_notification_update = "Статус уведомлений обновлен"
+    text_gmail_update = "Gmail аккаунт удален"
+    text_connect_gmail = "Подключите ваш Gmail аккаунт, чтобы информацию о заказах из сервисов доставки добавлялась автоматически"
 
     edit_personal = {"weight": "вес", "lenght": "рост", "birthday": "день рождения", "name": "имя"}
 

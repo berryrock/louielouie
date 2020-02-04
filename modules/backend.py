@@ -112,3 +112,42 @@ def update_info(user,type_of_data,value):
 	answer = answer.json()
 	print(answer)
 	return answer
+
+def user_settings(user):
+	print('settings')
+	user_acc = dbhelper.get_data(user,"acc")[0]
+	url = config.url + config.users + "user/info/"
+	answer = requests.get(url, auth=HTTPBasicAuth(user,user_acc))
+	answer = answer.json()
+	settings = {"notification": answer.get("notification",None)}
+	connected_accounts = answer.get("connected_accounts", None)
+	if connected_accounts:
+		for account in connected_accounts:
+			if account["name"] == "Gmail":
+				settings.update({"gmail_account": True})
+			elif account["name"] == "WiThings":
+				settings.update({"withings": True})
+	return settings
+
+def notifications_turn(user, status):
+	if status == config.Step.NOTIFICATION_ON.value:
+		data = {"notification": True}
+	else:
+		data = {"notification": False}
+	user_acc = dbhelper.get_data(user,"acc")[0]
+	url = config.url + config.users + "user/info/"
+	answer = requests.put(url, data=data, auth=HTTPBasicAuth(user,user_acc))
+	answer = answer.json()
+	print(answer)
+	return answer
+
+def clear_gmail(user, settings):
+	connected_accounts = settings.pop('connected_accounts')
+	connected_accounts.remove(1)
+	user_acc = dbhelper.get_data(user,"acc")[0]
+	url = config.url + config.users + "user/connected_service/"
+	data = {"connected_accounts": connected_accounts}
+	answer = requests.delete(url, data=data, auth=HTTPBasicAuth(user,user_acc))
+	answer = answer.json()
+	print(answer)
+	return answer

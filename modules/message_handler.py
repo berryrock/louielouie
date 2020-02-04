@@ -38,6 +38,11 @@ def message_handler(message, dbhelper, uihelper, backend):
             dbhelper.set_data(message.chat.id, config.UserData.BIRTH.value, user_birth)
             uihelper.about_user(message.chat.id, user_info)
 
+        elif message.text == config.Menu_RU.SETTINGS.value:
+            dbhelper.set_step(message.chat.id, config.Step.SETTINGS.value)
+            settings = backend.user_settings(message.chat.id)
+            uihelper.settings(message.chat.id, settings)
+
         else:
             try:
                 if step == config.Step.MAIN_MENU.value:
