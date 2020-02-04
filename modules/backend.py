@@ -123,9 +123,9 @@ def user_settings(user):
 	connected_accounts = answer.get("connected_accounts", None)
 	if connected_accounts:
 		for account in connected_accounts:
-			if account["name"] == "Gmail":
+			if account == 1:
 				settings.update({"gmail_account": True})
-			elif account["name"] == "WiThings":
+			elif account == 2:
 				settings.update({"withings": True})
 	return settings
 
