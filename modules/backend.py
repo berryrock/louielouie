@@ -142,6 +142,7 @@ def notifications_turn(user, status):
 	return answer
 
 def clear_gmail(user):
+	user_acc = dbhelper.get_data(user,"acc")[0]
 	url = config.url + config.users + "user/info/connected_service/"
 	data = {"service": config.GMAIL_SERVICE}
 	answer = requests.delete(url, data=data, auth=HTTPBasicAuth(user,user_acc))
