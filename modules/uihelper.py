@@ -157,9 +157,12 @@ def settings(chat, settings):
 		gmail_button = types.InlineKeyboardButton(text=translation["rus"].button_gmail_on, url=config.google_connect_url.format(chat))
 		message = message + "\n\n" + translation["rus"].text_connect_gmail
 	inline_keyboard.add(gmail_button)
-	menu_button = types.InlineKeyboardButton(text=translation["rus"].button_back_main_menu, callback_data=config.Step.MAIN_MENU.value)
-	inline_keyboard.add(menu_button)
 	bot.send_message(chat, message, reply_markup=inline_keyboard)
+	reply_keyboard = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
+	message_two = translation["rus"].text_connected_services
+	menu_button = types.InlineKeyboardButton(text=translation["rus"].button_back_main_menu, callback_data=config.Step.MAIN_MENU.value)
+	reply_keyboard.add(menu_button)
+	bot.send_message(chat, message_two, reply_markup=reply_keyboard)
 
 def notification_update(chat):
 	message = translation["rus"].text_notification_update
