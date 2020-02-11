@@ -112,6 +112,7 @@ def recomendations(chat,recomendations):
 		message = translation["rus"].text_eat_too_much
 	else:
 		dish_list = recomendations.split(';')
+		dish_list.reverse()
 		n = 0
 		for dish in dish_list:
 			reply_keyboard.add(dish)
