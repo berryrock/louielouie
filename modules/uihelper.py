@@ -14,9 +14,9 @@ def meal_info(chat, dish_info):
 	inline_keyboard.add(add_button,again_button)
 	try:
 		links = dish_info['links']
-		for link in links:
-			link_url = link['url'] + link['utm_tag']
-			link_button = types.InlineKeyboardButton(text=link['service'], url=link['url'])
+		for link in list(links):
+			link_url = link['url'] + '?' + link['utm_tag']
+			link_button = types.InlineKeyboardButton(text=link['service']['cta_word'], url=link_url)
 			inline_keyboard.add(link_button)
 	except KeyError:
 		pass
