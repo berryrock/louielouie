@@ -55,6 +55,8 @@ class Message():
     text_notification_update = "Notification status updated"
     text_gmail_update = "Gmail account deleted"
     text_connect_gmail = "Connect your Gmail account for automatical collection of your meals from food delivery services"
+    text_withings_update = "WiThings account deleted"
+    text_connect_withings = "Connect your WiThings account for automatical weight collection"
 
     edit_personal = {"weight": "weight", "lenght": "lenght", "birthday": "birthday", "name": "name"}
 
@@ -109,6 +111,8 @@ class RussianTranslation(Message):
     text_notification_update = "Статус уведомлений обновлен"
     text_gmail_update = "Gmail аккаунт удален"
     text_connect_gmail = "Подключите ваш Gmail аккаунт, чтобы информацию о заказах из сервисов доставки добавлялась автоматически"
+    text_withings_update = "WiThings аккаунт удален"
+    text_connect_withings = "Подключите аккаунт WiThings, чтобы автоматически добавлять информацию об изменении веса"
 
     edit_personal = {"weight": "вес", "lenght": "рост", "birthday": "день рождения", "name": "имя"}
 

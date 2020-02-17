@@ -159,6 +159,13 @@ def settings(chat, settings):
 		gmail_button = types.InlineKeyboardButton(text=translation["rus"].button_gmail_on, url=config.google_connect_url.format(chat))
 		message = message + "\n\n" + translation["rus"].text_connect_gmail
 	inline_keyboard.add(gmail_button)
+	withings_account = settings.get("withings", None)
+	if withings_account:
+		withings_button = types.InlineKeyboardButton(text=translation["rus"].button_withings_off, callback_data=config.Step.WITHINGS_OFF.value)
+	else:
+		withings_button = types.InlineKeyboardButton(text=translation["rus"].button_withings_on, url=config.withings_connect_url.format(chat))
+		message = message + "\n\n" + translation["rus"].text_connect_withings
+	inline_keyboard.add(withings_button)
 	bot.send_message(chat, message, reply_markup=inline_keyboard)
 	reply_keyboard = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
 	message_two = translation["rus"].text_connected_services
@@ -172,6 +179,10 @@ def notification_update(chat):
 
 def gmail_update(chat):
 	message = translation["rus"].text_gmail_update
+	bot.send_message(chat, message)
+
+def withings_update(chat):
+	message = translation["rus"].text_withings_update
 	bot.send_message(chat, message)
 
 def first_step(chat):

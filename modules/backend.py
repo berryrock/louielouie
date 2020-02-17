@@ -141,10 +141,10 @@ def notifications_turn(user, status):
 	print(answer)
 	return answer
 
-def clear_gmail(user):
+def clear_service(user, service):
 	user_acc = dbhelper.get_data(user,"acc")[0]
 	url = config.url + config.users + "user/info/connected_service/"
-	data = {"service": config.GMAIL_SERVICE}
+	data = {"service": service}
 	answer = requests.delete(url, data=data, auth=HTTPBasicAuth(user,user_acc))
 	answer = answer.json()
 	print(answer)

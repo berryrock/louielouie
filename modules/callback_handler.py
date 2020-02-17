@@ -128,7 +128,13 @@ def callback_handler(call, dbhelper, uihelper, backend):
 
             elif call.data == config.Step.GMAIL_OFF.value:
                 dbhelper.set_step(call.message.chat.id, config.Step.SETTINGS.value)
-                settings = backend.clear_gmail(call.message.chat.id)
+                settings = backend.clear_service(call.message.chat.id, config.GMAIL_SERVICE)
+                uihelper.gmail_update(call.message.chat.id)
+                uihelper.settings(call.message.chat.id, settings)
+
+            elif call.data == config.Step.GMAIL_OFF.value:
+                dbhelper.set_step(call.message.chat.id, config.Step.SETTINGS.value)
+                settings = backend.clear_service(call.message.chat.id, config.WITHINGS_SERVICE)
                 uihelper.gmail_update(call.message.chat.id)
                 uihelper.settings(call.message.chat.id, settings)
 
