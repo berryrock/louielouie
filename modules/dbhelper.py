@@ -26,7 +26,6 @@ class DBhelper():
         return [x[0] for x in self.conn.execute(stmt)]
 
     def set_data(self, user_id, type_of_data, value):
-        print('type_of_data', type_of_data)
         stmt = 'UPDATE users SET {} = "{}" WHERE user_id = "{}"'.format(type_of_data, value, user_id)
         self.conn.execute(stmt)
         self.conn.commit()
@@ -47,14 +46,11 @@ class DBhelper():
 
     def set_call(self, user_id, value):
         previous_calls = self.get_call(user_id)
-        print('setting calls', 'previous:', previous_calls, 'actual', value)
         if len(previous_calls) < 1:
             previous_calls = ['Empty', 'Empty']
         elif len(previous_calls) < 2:
             previous_calls.append('Empty')
-        print('previous updated', previous_calls)
         stmt = 'UPDATE users SET call = "{}", prev_call = "{}", prev_prev_call = "{}" WHERE user_id = "{}"'.format(value, previous_calls[0], previous_calls[1], user_id)
-        print(stmt)
         self.conn.execute(stmt)
         self.conn.commit()
 

@@ -28,7 +28,7 @@ def daily_info(user):
 	answer = requests.get(url, auth=HTTPBasicAuth(user,user_acc))
 	try:
 		answer = answer.json()
-		return {"consumpted_kcal": answer["consumpted_kcal"], "daily_kcal": answer["daily_kcal"], "diets": answer.get("diets",[]), "alleged": answer.get("alleged",[])}
+		return {"consumpted_kcal": str(answer["consumpted_kcal"]), "daily_kcal": str(answer["daily_kcal"]), "diets": answer.get("diets",[]), "alleged": answer.get("alleged",[])}
 	except:
 		return False
 

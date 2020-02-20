@@ -72,7 +72,7 @@ def main_menu(chat, diets=None, kcal_consumpted=None, kcal_daily=None):
 			message += ' {}'.format(diet["name"])
 			if n < (len(diets)):
 				message += ','
-	if kcal_consumpted >= 0 and kcal_daily >= 0:
+	if kcal_consumpted and kcal_daily:
 		message += '\n\n' + translation["rus"].text_daily_kcal.format(kcal_consumpted, kcal_daily)
 	bot.send_message(chat, message, reply_markup=reply_keyboard)
 

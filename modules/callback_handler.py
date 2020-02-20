@@ -67,13 +67,6 @@ def callback_handler(call, dbhelper, uihelper, backend):
                 uihelper.main_menu(call.message.chat.id)
 
             elif call.data[:4] == config.Step.ALLEGED_ACCEPT.value:
-                print()
-                print()
-                print()
-                print()
-                print()
-                print("ACCEPTED ALLEGED")
-                print(call.data[:4])
                 dbhelper.set_step(call.message.chat.id, config.Step.MAIN_MENU.value)
                 backend.accept_alleged(call.message.chat.id,call.data[4:])
                 uihelper.alleged_accepted(call.message.chat.id)
