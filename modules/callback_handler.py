@@ -69,12 +69,12 @@ def callback_handler(call, dbhelper, uihelper, backend):
             elif call.data[:4] == config.Step.ALLEGED_ACCEPT.value:
                 dbhelper.set_step(call.message.chat.id, config.Step.MAIN_MENU.value)
                 backend.accept_alleged(call.message.chat.id,call.data[4:])
-                uihelper.alleged_accepted(call.message.chat.id)
+                uihelper.alleged_accept(call.message.chat.id)
 
             elif call.data[:4] == config.Step.ALLEGED_DECLINE.value:
                 dbhelper.set_step(call.message.chat.id, config.Step.MAIN_MENU.value)
                 backend.accept_alleged(call.message.chat.id,call.data[4:],accept=False)
-                uihelper.alleged_declined(call.message.chat.id)
+                uihelper.alleged_decline(call.message.chat.id)
 
             elif call.data == config.Step.ALLEGED_DECLINE.value:
                 dbhelper.set_step(call.message.chat.id, config.Step.MAIN_MENU.value)

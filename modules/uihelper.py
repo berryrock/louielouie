@@ -105,7 +105,7 @@ def alleged(chat, item):
 		pass
 	bot.send_message(chat, message, reply_markup=inline_keyboard)
 
-def alleged_accepted(chat):
+def alleged_accept(chat):
 	message = translation["rus"].text_alleged_accept
 	bot.send_message(chat, message)
 
