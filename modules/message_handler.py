@@ -9,12 +9,6 @@ def message_handler(message, dbhelper, uihelper, backend):
         if message.text == config.Menu_RU.MAIN_MENU.value:
             dbhelper.set_step(message.chat.id, config.Step.MAIN_MENU.value)
             daily_info = backend.daily_info(message.chat.id)
-            print()
-            print()
-            print('### DAILY INFO ###')
-            print(daily_info)
-            print()
-            print()
             uihelper.main_menu(message.chat.id, diets=daily_info['diets'], kcal_consumpted=daily_info['consumpted_kcal'], kcal_daily=daily_info['daily_kcal'])
             for alleged in daily_info['alleged'][:3]:
                 uihelper.alleged(message.chat.id, alleged)
