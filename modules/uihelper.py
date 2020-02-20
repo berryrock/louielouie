@@ -3,6 +3,8 @@ from telebot import types
 from modules.messages import translation
 import config
 
+import datetime
+
 bot = telebot.TeleBot(config.token)
 
 ''' MEAL, MEAL_ADD and MEAL_INFO'''
