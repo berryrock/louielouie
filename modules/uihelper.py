@@ -92,7 +92,7 @@ def alleged(chat, item):
 	date_time = item.get("date_time", None)
 	if date_time:
 		date_time = datetime.datetime.strptime(date_time, '%Y-%m-%dT%H:%M:%f%z')
-		date_time = date_time.strptime('%d %m %Y, %H:%M:%S')
+		date_time = date_time.strftime('%d %m %Y, %H:%M:%S')
 	else:
 		date_time = 'unknown'
 	message = translation["rus"].text_alleged.format(item["dish"]["name"],date_time)
