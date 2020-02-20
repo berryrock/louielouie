@@ -10,7 +10,7 @@ def message_handler(message, dbhelper, uihelper, backend):
             dbhelper.set_step(message.chat.id, config.Step.MAIN_MENU.value)
             daily_info = backend.daily_info(message.chat.id)
             uihelper.main_menu(message.chat.id, diets=daily_info['diets'], kcal_consumpted=daily_info['consumpted_kcal'], kcal_daily=daily_info['daily_kcal'])
-            if len(alleged) > 0:
+            if len(daily_info['alleged']) > 0:
                 uihelper.alleged_message(message.chat.id)
                 for alleged in daily_info['alleged'][:3]:
                     uihelper.alleged(message.chat.id, alleged)
