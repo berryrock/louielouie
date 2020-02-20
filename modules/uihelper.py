@@ -102,7 +102,7 @@ def alleged(chat, item):
 	bot.send_message(chat, message, reply_markup=inline_keyboard)
 
 def alleged_accepted(chat):
-	message = translation["rus"].text_alleged_accepted
+	message = translation["rus"].text_alleged_accept
 
 def alleged_decline(chat):
 	message = translation["rus"].text_alleged_decline
