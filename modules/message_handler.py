@@ -8,7 +8,10 @@ def message_handler(message, dbhelper, uihelper, backend):
 
         if message.text == config.Menu_RU.MAIN_MENU.value:
             dbhelper.set_step(message.chat.id, config.Step.MAIN_MENU.value)
-            uihelper.main_menu(message.chat.id)
+            daily_info = backend.daily_info(message.chat.id)
+            uihelper.main_menu(message.chat.id, daily_info['diets'], daily_info['consumpted_kcal'], daily_info['daily_kcal'])
+            for alleged in daily_info['alleged'][:3]:
+                uihelper.alleged(message.chat.id, alleged)
 
         elif message.text == config.Menu_RU.RECOMENDATIONS.value:
             dbhelper.set_step(message.chat.id, config.Step.MEAL.value)

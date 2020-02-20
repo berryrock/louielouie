@@ -19,6 +19,8 @@ class Message():
     button_gmail_off = "Disconnect Gmail account"
     button_withings_on = "Connect WiThings account"
     button_withings_off = "Disconnect WiThings account"
+    button_alleged_accept = "Accept"
+    button_alleged_decline = "Decline"
 
     main_menu = "/main_menu"
     weight = "/weight"
@@ -57,6 +59,13 @@ class Message():
     text_connect_gmail = "Connect your Gmail account for automatical collection of your meals from food delivery services"
     text_withings_update = "WiThings account deleted"
     text_connect_withings = "Connect your WiThings account for automatical weight collection"
+    text_daily_kcal = "{} kcals from {} already consumpted today"
+    text_alleged = "There are some meals in database but I'm not sure that all of them were eat by you\nPlease Accept or Decline them"
+    text_daily_diets = "Your diets:"
+    text_alleged = "Dish name: {}\nDate: {}"
+    text_alleged_source = "\nSource: {}"
+    text_alleged_accept = "Thank you!\nMeal accepted"
+    text_alleged_decline = "Thank you!\nMeal declined"
 
     edit_personal = {"weight": "weight", "lenght": "lenght", "birthday": "birthday", "name": "name"}
 
@@ -81,6 +90,8 @@ class RussianTranslation(Message):
     button_gmail_off = "Отключить Gmail аккаунт"
     button_withings_on = "Подключить WiThings аккаунт"
     button_withings_off = "Отключить WiThings аккаунт"
+    button_alleged_accept = "Подтвердить"
+    button_alleged_decline = "Отклонить"
 
     text_meal_info = "Запишите, что съели это блюдо или выберите другое"
     text_loading = "Обновляю данные, пожалуйста, подождите..."
@@ -113,6 +124,13 @@ class RussianTranslation(Message):
     text_connect_gmail = "Подключите ваш Gmail аккаунт, чтобы информацию о заказах из сервисов доставки добавлялась автоматически"
     text_withings_update = "WiThings аккаунт удален"
     text_connect_withings = "Подключите аккаунт WiThings, чтобы автоматически добавлять информацию об изменении веса"
+    text_daily_kcal = "Сегодня уже потреблено {} из {} калорий"
+    text_alleged = "Мы нашли несколько блюд, которые Вы, вероятно, ели, но мы не уверены на счет них полностью.\n Пожайлуста, Подтвердите или Отклоните их"
+    text_daily_diets = "Тип питания:"
+    text_alleged = "Название блюда: {}\nДата: {}"
+    text_alleged_source = "\nИсточник: {}"
+    text_alleged_accept = "Спасибо!\nПрием пищи записан"
+    text_alleged_decline = "Спасибо!\nПрием пищи отклонен"
 
     edit_personal = {"weight": "вес", "lenght": "рост", "birthday": "день рождения", "name": "имя"}
 

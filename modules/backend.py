@@ -7,6 +7,34 @@ from requests.auth import HTTPBasicAuth
 
 dbhelper = DBhelper()
 
+
+'''
+MAIN FUNCTIONS
+'''
+def add_user(user):
+	url = config.url + config.users + "user/create/telegram/"
+	password = generate()
+	print(password)
+	data = {"username": user, "password": password}
+	answer = requests.post(url, data=data)
+	answer = answer.json()
+	print(answer)
+	result = dbhelper.add_user(user, data["password"])
+	return result
+
+def daily_info(user):
+	user_acc = dbhelper.get_data(user,"acc")[0]
+	url = config.url + config.region + "user/daily/"
+	answer = requests.get(url, auth=HTTPBasicAuth(user,user_acc))
+	try:
+		answer = answer.json()
+		return {"consumpted_kcal": answer["consumpted_kcal"], "daily_kcal": answer["daily_kcal"], "diets": answer.get("diets",[]), "alleged": answer.get("alleged",[])}
+	except:
+		return False
+
+'''
+MEAL and WEIGHT screen backend functions
+'''
 def dish_info(user, dish):
 	user_acc = dbhelper.get_data(user,"acc")[0]
 	url = config.url + config.region + "user/dish_message/"
@@ -24,6 +52,7 @@ def dish_info(user, dish):
 	except KeyError:
 		return [answer, False]
 
+
 def exact_dish(user, dish):
 	user_acc = dbhelper.get_data(user,"acc")[0]
 	url = config.url + config.region + "user/dish_message/"
@@ -37,6 +66,57 @@ def exact_dish(user, dish):
 	except KeyError:
 		return [answer, False]
 
+
+def send_meal(user, dish):
+	print(dish)
+	user_acc = dbhelper.get_data(user,"acc")[0]
+	url = config.url + config.region + "mealmap/"
+	data = {"dish": dish, "accepted": True}
+	answer = requests.post(url, data=data, auth=HTTPBasicAuth(user,user_acc))
+	answer = answer.json()
+	print(answer)
+	return True
+
+
+def send_weight(user, weight):
+	user_acc = dbhelper.get_data(user,"acc")[0]
+	url = config.url + config.region + "mealmap/"
+	data = {"weight": weight, "accepted": True}
+	answer = requests.post(url, data=data, auth=HTTPBasicAuth(user,user_acc))
+	answer = answer.json()
+	print(answer)
+	return True
+
+
+def accept_alleged(user,alleged_id,accept=True):
+	user_acc = dbhelper.get_data(user,"acc")[0]
+	url = config.url + config.region + "alleged/{}/accept/".format(alleged_id)
+	if accept:
+		answer = requests.get(url, auth=HTTPBasicAuth(user,user_acc))
+	else:
+		answer = requests.delete(url, auth=HTTPBasicAuth(user,user_acc))
+	answer = answer.json()
+	print(answer)
+	return True
+
+
+'''
+Recomendation screen backend functions
+'''
+def recomendations(user):
+	user_acc = dbhelper.get_data(user,"acc")[0]
+	url = config.url + config.region + "user/preference_vector/ALL/"
+	answer = requests.get(url, auth=HTTPBasicAuth(user,user_acc))
+	answer = answer.json()
+	print(answer)
+	return answer["dishes"]
+
+
+
+
+'''
+User information screen backend functions
+'''
 def user_info(user):
 	user_acc = dbhelper.get_data(user,"acc")[0]
 	url = config.url + config.users + "user/info/"
@@ -44,6 +124,7 @@ def user_info(user):
 	answer = answer.json()
 	print(answer)
 	return answer
+
 
 def user_diet(user,status):
 	user_acc = dbhelper.get_data(user,"acc")[0]
@@ -63,44 +144,6 @@ def user_diet(user,status):
 		print(answer)
 		return False
 
-def add_user(user):
-	url = config.url + config.users + "user/create/telegram/"
-	password = generate()
-	print(password)
-	data = {"username": user, "password": password}
-	answer = requests.post(url, data=data)
-	answer = answer.json()
-	print(answer)
-	result = dbhelper.add_user(user, data["password"])
-	return result
-
-
-def recomendations(user):
-	user_acc = dbhelper.get_data(user,"acc")[0]
-	url = config.url + config.region + "user/preference_vector/"
-	answer = requests.get(url, auth=HTTPBasicAuth(user,user_acc))
-	answer = answer.json()
-	print(answer)
-	return answer["dishes"]
-
-def send_weight(user, weight):
-	user_acc = dbhelper.get_data(user,"acc")[0]
-	url = config.url + config.region + "mealmap/"
-	data = {"weight": weight, "accepted": True}
-	answer = requests.post(url, data=data, auth=HTTPBasicAuth(user,user_acc))
-	answer = answer.json()
-	print(answer)
-	return True
-
-def send_meal(user, dish):
-	print(dish)
-	user_acc = dbhelper.get_data(user,"acc")[0]
-	url = config.url + config.region + "mealmap/"
-	data = {"dish": dish, "accepted": True}
-	answer = requests.post(url, data=data, auth=HTTPBasicAuth(user,user_acc))
-	answer = answer.json()
-	print(answer)
-	return True
 
 def update_info(user,type_of_data,value):
 	print('updating')
@@ -113,6 +156,21 @@ def update_info(user,type_of_data,value):
 	print(answer)
 	return answer
 
+
+def mealhistory(user,days=7):
+	user_acc = dbhelper.get_data(user,"acc")[0]
+	url = config.url + config.region + "user/mealhistory/{}/".format(days)
+	answer = requests.get(url, auth=HTTPBasicAuth(user,user_acc))
+	answer = answer.json()
+	print(answer)
+	return answer
+
+
+
+
+'''
+SETTINGS screen backend functions
+'''
 def user_settings(user):
 	print('settings')
 	user_acc = dbhelper.get_data(user,"acc")[0]
@@ -129,6 +187,7 @@ def user_settings(user):
 				settings.update({"withings": True})
 	return settings
 
+
 def notifications_turn(user, status):
 	if status == config.Step.NOTIFICATION_ON.value:
 		data = {"notification": True}
@@ -140,6 +199,7 @@ def notifications_turn(user, status):
 	answer = answer.json()
 	print(answer)
 	return answer
+
 
 def clear_service(user, service):
 	user_acc = dbhelper.get_data(user,"acc")[0]
