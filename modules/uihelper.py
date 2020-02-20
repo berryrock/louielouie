@@ -84,6 +84,10 @@ def error_message(chat):
 	message = translation["rus"].text_error
 	bot.send_message(chat, message)
 
+def alleged_message(chat):
+	message = translation["rus"].text_alleged
+	bot.send_message(chat, message)
+
 def alleged(chat, item):
 	inline_keyboard = types.InlineKeyboardMarkup()
 	accept_button = types.InlineKeyboardButton(text=translation["rus"].button_alleged_accept, callback_data=(config.Step.ALLEGED_ACCEPT.value + str(item["id"])))
@@ -94,7 +98,7 @@ def alleged(chat, item):
 		date_time = datetime.datetime.strptime(date_time, '%Y-%m-%dT%H:%M:%f%z').strftime('%d-%m-%Y, %H:%M:%S')
 	else:
 		date_time = 'unknown'
-	message = translation["rus"].text_alleged.format(item["dish"]["name"],date_time)
+	message = translation["rus"].text_alleged_meal.format(item["dish"]["name"],date_time)
 	try:
 		message += translation["rus"].text_alleged_source.format(item["source"])
 	except KeyError:
