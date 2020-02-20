@@ -103,9 +103,11 @@ def alleged(chat, item):
 
 def alleged_accepted(chat):
 	message = translation["rus"].text_alleged_accept
+	bot.send_message(chat, message)
 
 def alleged_decline(chat):
 	message = translation["rus"].text_alleged_decline
+	bot.send_message(chat, message)
 
 
 '''
