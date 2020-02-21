@@ -95,7 +95,7 @@ def alleged(chat, item):
 	inline_keyboard.add(accept_button,decline_button)
 	date_time = item.get("date_time", None)
 	if date_time:
-		date_time = datetime.datetime.strptime(date_time, '%Y-%m-%dT%H:%M:%f%z').strftime('%d-%m-%Y, %H:%M:%S')
+		date_time = datetime.datetime.strptime(date_time, '%Y-%m-%dT%H:%M:%f%z').strftime('%d-%m-%Y, %H:%M:%s')
 	else:
 		date_time = 'unknown'
 	message = translation["rus"].text_alleged_meal.format(item["dish"]["name"],date_time)
@@ -189,7 +189,7 @@ def meal_in_histroy(chat, meal):
 	inline_keyboard = types.InlineKeyboardMarkup()
 	delete_button = types.InlineKeyboardButton(text=translation["rus"].button_meal_history_delete, callback_data=(config.Step.MEAL_HISTORY_DELETE.value + str(meal['id'])))
 	inline_keyboard.add(delete_button)
-	message = translation["rus"].text_meal_in_history.format(meal["dish"]["name"],meal["date_time"])
+	message = translation["rus"].text_meal_in_history.format(meal["dish"]["name"],str(datetime.datetime.strptime(meal["date_time"], '%Y-%m-%dT%H:%M:%f%z').strftime('%d-%m-%Y, %H:%M:%S')))
 	bot.send_message(chat, message, reply_markup=inline_keyboard)
 
 def meal_deleted(chat):
