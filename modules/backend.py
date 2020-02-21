@@ -163,10 +163,16 @@ def mealhistory(user,days=7):
 	answer = requests.get(url, auth=HTTPBasicAuth(user,user_acc))
 	answer = answer.json()
 	print(answer)
+	return (days, answer)
+
+
+def delete_meal(user, meal_id):
+	user_acc = dbhelper.get_data(user,"acc")[0]
+	url = config.url + config.region + "mealmap/{}/".format(meal_id)
+	answer = requests.delete(url, auth=HTTPBasicAuth(user,user_acc))
+	answer = requests.get(url, auth=HTTPBasicAuth(user,user_acc))
+	print(answer)
 	return answer
-
-
-
 
 '''
 SETTINGS screen backend functions

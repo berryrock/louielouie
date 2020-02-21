@@ -21,6 +21,10 @@ class Message():
     button_withings_off = "Disconnect WiThings account"
     button_alleged_accept = "Accept"
     button_alleged_decline = "Decline"
+    button_meal_history = "Meal history"
+    button_meal_history_delete = "Delete meal"
+    button_meal_history_forward = "Next >>"
+    button_meal_history_back = "<< Previous"
 
     main_menu = "/main_menu"
     weight = "/weight"
@@ -66,6 +70,9 @@ class Message():
     text_alleged_source = "\nSource: {}"
     text_alleged_accept = "Thank you!\nMeal accepted"
     text_alleged_decline = "Thank you!\nMeal declined"
+    text_meal_in_histroy = "Dish: {}\nDate: {}"
+    text_meal_history_navigation = "Here is all added meals for 7 days period"
+    text_meal_deleted = "Meal will be deleted"
 
     edit_personal = {"weight": "weight", "lenght": "lenght", "birthday": "birthday", "name": "name"}
 
@@ -82,8 +89,8 @@ class RussianTranslation(Message):
     button_edit_lenght = "Рост"
     button_private_policy = "Политика конфиденциальности"
     button_accept_policy = "Я принимаю политику конфиденциальности"
-    button_turn_on_diet = "Диета при высоком холестерине: ВКЛЮЧИТЬ"
-    button_turn_off_diet = "Диета при высоком холестерине: ВЫКЛЮЧИТЬ"
+    button_turn_on_diet = "Повышенный холестерин: ВКЛЮЧИТЬ"
+    button_turn_off_diet = "Повышенный холестерин: ВЫКЛЮЧИТЬ"
     button_notication_on = "Включить уведомления"
     button_notication_off = "Выключить уведомления"
     button_gmail_on = "Подключить Gmail аккаунт"
@@ -92,6 +99,10 @@ class RussianTranslation(Message):
     button_withings_off = "Отключить WiThings аккаунт"
     button_alleged_accept = "Подтвердить"
     button_alleged_decline = "Отклонить"
+    button_meal_history = "История приемов пищи"
+    button_meal_history_delete = "Удалить прием пищи"
+    button_meal_history_forward = "Следующие 7 дней >>"
+    button_meal_history_back = "<< Предыдущие 7 дней"
 
     text_meal_info = "Запишите, что съели это блюдо или выберите другое"
     text_loading = "Обновляю данные, пожалуйста, подождите..."
@@ -131,6 +142,9 @@ class RussianTranslation(Message):
     text_alleged_source = "\nИсточник: {}"
     text_alleged_accept = "Спасибо!\nПрием пищи записан"
     text_alleged_decline = "Спасибо!\nПрием пищи отклонен"
+    text_meal_in_histroy = "Название блюда: {}\nДата: {}"
+    text_meal_history_navigation = "История приемов пищи за период 7 дней"
+    text_meal_deleted = "Прием пищи будет удален"
 
     edit_personal = {"weight": "вес", "lenght": "рост", "birthday": "день рождения", "name": "имя"}
 

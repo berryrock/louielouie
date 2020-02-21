@@ -126,6 +126,21 @@ def callback_handler(call, dbhelper, uihelper, backend):
                 dbhelper.set_data(call.message.chat.id, config.UserData.BIRTH.value, user_birth)
                 uihelper.about_user(call.message.chat.id, user_info)
 
+            elif call.data[:2] == config.Step.MEAL_HISTORY.value:
+                dbhelper.set_step(call.message.chat.id, config.Step.MEAL_HISTORY.value)
+                if call.data == config.Step.MEAL_HISTORY.value:
+                    mealhistory = backend.mealhistory(call.message.chat.id)
+                elif call.data[3] == 'f' or call.data[3] == 'b':
+                    mealhistory = backend.mealhistory(call.message.chat.id,days=int(call.data[4:]))
+                for meal in mealhistory[1]:
+                    uihelper.meal_in_histroy(call.message.chat.id,meal)
+                uihelper.history_navigation(call.message.chat.id,mealhistory[0])
+
+            elif call.data[:2] == config.Step.MEAL_HISTORY_DELETE.value:
+                dbhelper.set_step(call.message.chat.id, config.Step.MEAL_HISTORY.value)
+                backend.delete_meal(call.message.chat.id, call.data[2:])
+                uihelper.meal_deleted(call.message.chat.id)
+
             elif call.data == config.Step.NOTIFICATION_ON.value:
                 dbhelper.set_step(call.message.chat.id, config.Step.SETTINGS.value)
                 backend.notifications_turn(call.message.chat.id, config.Step.NOTIFICATION_ON.value)

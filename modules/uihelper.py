@@ -152,6 +152,8 @@ def about_user(chat,user_info):
 		message = translation["rus"].text_about_user.format(user_info.get('name', 'Empty'),user_info.get('birthday', 'Empty'),user_info.get('weight', 'Empty'),user_info.get('lenght', 'Empty'))
 		diet_button = types.InlineKeyboardButton(text=translation["rus"].button_turn_off_diet, callback_data=config.Step.DIET_OFF.value)
 	inline_keyboard.add(diet_button)
+	mealhistory_button = types.InlineKeyboardButton(text=translation["rus"].button_meal_history, callback_data=config.Step.MEAL_HISTORY.value)
+	inline_keyboard.add(mealhistory_button)
 	bot.send_message(chat, message, reply_markup=inline_keyboard)
 	bot.send_message(chat, text=translation["rus"].text_more_inforamtion_add, reply_markup=reply_keyboard)
 
@@ -182,6 +184,30 @@ def updated_user(chat, type_of_info):
 	message = translation["rus"].text_updated_info.format(translation["rus"].edit_personal.get(type_of_info,""))
 	bot.send_message(chat, message)
 
+
+def meal_in_histroy(chat, meal):
+	inline_keyboard = types.InlineKeyboardMarkup()
+	menu_button = types.InlineKeyboardButton(text=translation["rus"].button_meal_history_delete, callback_data=(config.Step.MEAL_HISTORY_DELETE.value + meal['id']))
+	inline_keyboard.add(delete_button)
+	message = translation["rus"].text_meal_in_histroy
+	bot.send_message(chat, message, reply_markup=inline_keyboard)
+
+def meal_deleted(chat):
+	message = translation["rus"].text_meal_deleted
+	bot.send_message(chat, message)
+
+def history_navigation(chat, days):
+	inline_keyboard = types.InlineKeyboardMarkup()
+	forward_button = types.InlineKeyboardButton(text=translation["rus"].button_meal_history_forward, callback_data=(config.Step.MEAL_HISTORY_FORWARD.value + str(days + 7)))
+	if days > 7:
+		back_button = types.InlineKeyboardButton(text=translation["rus"].button_meal_history_back, callback_data=(config.Step.MEAL_HISTORY_BACK.value + str(days - 7)))
+		inline_keyboard.add(back_button,forward_button)
+	else:
+		inline_keyboard.add(forward_button)
+	menu_button = types.InlineKeyboardButton(text=translation["rus"].button_back_main_menu, callback_data=config.Step.MAIN_MENU.value)
+	inline_keyboard.add(menu_button)
+	message = translation["rus"].text_meal_history_navigation
+	bot.send_message(chat, message, reply_markup=inline_keyboard)
 
 
 '''
