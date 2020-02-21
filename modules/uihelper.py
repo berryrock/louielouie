@@ -187,7 +187,7 @@ def updated_user(chat, type_of_info):
 
 def meal_in_histroy(chat, meal):
 	inline_keyboard = types.InlineKeyboardMarkup()
-	menu_button = types.InlineKeyboardButton(text=translation["rus"].button_meal_history_delete, callback_data=(config.Step.MEAL_HISTORY_DELETE.value + str(meal['id'])))
+	delete_button = types.InlineKeyboardButton(text=translation["rus"].button_meal_history_delete, callback_data=(config.Step.MEAL_HISTORY_DELETE.value + str(meal['id'])))
 	inline_keyboard.add(delete_button)
 	message = translation["rus"].text_meal_in_histroy
 	bot.send_message(chat, message, reply_markup=inline_keyboard)
