@@ -189,7 +189,11 @@ def meal_in_histroy(chat, meal):
 	inline_keyboard = types.InlineKeyboardMarkup()
 	delete_button = types.InlineKeyboardButton(text=translation["rus"].button_meal_history_delete, callback_data=(config.Step.MEAL_HISTORY_DELETE.value + str(meal['id'])))
 	inline_keyboard.add(delete_button)
-	message = translation["rus"].text_meal_in_history.format(meal["dish"]["name"],str(datetime.datetime.strptime(meal["date_time"], '%Y-%m-%dT%H:%M:%f%z').strftime('%d-%m-%Y, %H:%M:%S')))
+	try:
+		date_time = str(datetime.datetime.strptime(meal["date_time"], '%Y-%m-%dT%H:%M:%f%z').strftime('%d-%m-%Y, %H:%M:%S'))
+	except ValueError:
+		date_time = meal["date_time"]
+	message = translation["rus"].text_meal_in_history.format(meal["dish"]["name"],date_time)
 	bot.send_message(chat, message, reply_markup=inline_keyboard)
 
 def meal_deleted(chat):
