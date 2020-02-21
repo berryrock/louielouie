@@ -70,7 +70,7 @@ class Message():
     text_alleged_source = "\nSource: {}"
     text_alleged_accept = "Thank you!\nMeal accepted"
     text_alleged_decline = "Thank you!\nMeal declined"
-    text_meal_in_histroy = "Dish: {}\nDate: {}"
+    text_meal_in_history = "Dish: {}\nDate: {}"
     text_meal_history_navigation = "Here is all added meals for 7 days period"
     text_meal_deleted = "Meal will be deleted"
 
@@ -142,7 +142,7 @@ class RussianTranslation(Message):
     text_alleged_source = "\nИсточник: {}"
     text_alleged_accept = "Спасибо!\nПрием пищи записан"
     text_alleged_decline = "Спасибо!\nПрием пищи отклонен"
-    text_meal_in_histroy = "Название блюда: {}\nДата: {}"
+    text_meal_in_history = "Название блюда: {}\nДата: {}"
     text_meal_history_navigation = "История приемов пищи за период 7 дней"
     text_meal_deleted = "Прием пищи будет удален"
 
