@@ -95,7 +95,10 @@ def alleged(chat, item):
 	inline_keyboard.add(accept_button,decline_button)
 	date_time = item.get("date_time", None)
 	if date_time:
-		date_time = datetime.datetime.strptime(date_time, '%Y-%m-%dT%H:%M:%f%z').strftime('%d-%m-%Y, %H:%M:%s')
+		try:
+			date_time = datetime.datetime.strptime(date_time, '%Y-%m-%dT%H:%M:%f%z').strftime('%d-%m-%Y, %H:%M:%s')
+		except ValueError:
+			date_time = date_time
 	else:
 		date_time = 'unknown'
 	message = translation["rus"].text_alleged_meal.format(item["dish"]["name"],date_time)
