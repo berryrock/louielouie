@@ -39,7 +39,7 @@ def dish_info(user, dish):
 	user_acc = dbhelper.get_data(user,"acc")[0]
 	url = config.url + config.region + "user/dish_message/"
 	data = {"dish": dish}
-	answer = requests.get(url, data=data, auth=HTTPBasicAuth(user,user_acc))
+	answer = requests.post(url, data=data, auth=HTTPBasicAuth(user,user_acc))
 	answer = answer.json()
 	print(answer)
 	if answer['similar_dishes']:
