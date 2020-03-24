@@ -127,7 +127,7 @@ def message_handler(message, dbhelper, uihelper, backend):
                         uihelper.meal_info(message.chat.id, dish_info[0])
 
                     elif dish_info[1] == False:
-                        similar_dishes = dish_info[0]['similar_dishes'].split(';')
+                        similar_dishes = dish_info[0]['similar_dishes']
                         dbhelper.set_data(message.chat.id, config.UserData.DISH.value, message.text)
                         dbhelper.set_step(message.chat.id, config.Step.MEAL.value)
                         uihelper.choose_dish_from_list(message.chat.id, similar_dishes)

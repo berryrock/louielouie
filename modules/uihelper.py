@@ -15,7 +15,7 @@ def meal_info(chat, dish_info):
 	again_button = types.InlineKeyboardButton(text=translation["rus"].button_try_another, callback_data=config.Step.MEAL.value)
 	inline_keyboard.add(add_button,again_button)
 	try:
-		links = dish_info['links']
+		links = dish_info['dish']['links']
 		for link in list(links):
 			link_url = link['url'] + '?' + link['utm_tag']
 			link_button = types.InlineKeyboardButton(text=link['service']['cta_word'], url=link_url)
@@ -24,14 +24,14 @@ def meal_info(chat, dish_info):
 		pass
 	menu_button = config.Menu_RU.MAIN_MENU.value
 	reply_keyboard.add(menu_button)
-	message = '{}\n\n{}'.format(dish_info['dish'],dish_info['message'])
+	message = '{}\n\n{}'.format(dish_info['dish']['name'],dish_info['message'])
 	bot.send_message(chat, message, reply_markup=inline_keyboard)
 	bot.send_message(chat, text=translation["rus"].text_meal_info, reply_markup=reply_keyboard)
 
 def choose_dish_from_list(chat,dish_list):
 	reply_keyboard = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
 	for dish in dish_list:
-		reply_keyboard.add(dish)
+		reply_keyboard.add(dish["name"])
 	message = translation["rus"].text_too_much_similar
 	bot.send_message(chat, message, reply_markup=reply_keyboard)
 
@@ -227,11 +227,11 @@ def recomendations(chat,recomendations):
 		reply_keyboard.add(menu_button)
 		message = translation["rus"].text_eat_too_much
 	else:
-		dish_list = recomendations.split(';')
+		dish_list = recomendations["dishes"]
 		dish_list.reverse()
 		n = 0
 		for dish in dish_list:
-			reply_keyboard.add(dish)
+			reply_keyboard.add(dish["name"])
 			n += 1
 			if n == 6:
 				break

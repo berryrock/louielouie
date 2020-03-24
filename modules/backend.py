@@ -42,15 +42,16 @@ def dish_info(user, dish):
 	answer = requests.get(url, data=data, auth=HTTPBasicAuth(user,user_acc))
 	answer = answer.json()
 	print(answer)
-	try:
+	if answer['similar_dishes']:
+		return [answer, False]
+	else:
 		dish = answer["dish"]
 		"""if "No message to display" in dish["message"]:
 			dish.update({"message":"Нет сообщения для показа"})
 		elif "not found in database." in dish["message"]:
 			dish.update({"message":"Не найдено в базе данных. Мы обязательно добавим его"})"""
 		return [answer, True]
-	except KeyError:
-		return [answer, False]
+
 
 
 def exact_dish(user, dish):
