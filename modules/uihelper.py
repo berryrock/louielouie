@@ -222,15 +222,14 @@ RECOMENDATION
 '''
 def recomendations(chat,recomendations):
 	reply_keyboard = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
-	if recomendations == '':
+	if len(recomendations) < 1:
 		menu_button = config.Menu_RU.MAIN_MENU.value
 		reply_keyboard.add(menu_button)
 		message = translation["rus"].text_eat_too_much
 	else:
-		dish_list = recomendations["dishes"]
-		dish_list.reverse()
+		recomendations.reverse()
 		n = 0
-		for dish in dish_list:
+		for dish in recomendations:
 			reply_keyboard.add(dish["name"])
 			n += 1
 			if n == 6:
