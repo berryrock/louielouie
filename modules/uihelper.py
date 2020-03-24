@@ -9,6 +9,7 @@ bot = telebot.TeleBot(config.token)
 
 ''' MEAL, MEAL_ADD and MEAL_INFO'''
 def meal_info(chat, dish_info):
+	print(dish_info)
 	inline_keyboard = types.InlineKeyboardMarkup()
 	reply_keyboard = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
 	add_button = types.InlineKeyboardButton(text=translation["rus"].button_add_meal, callback_data=config.Step.MEAL_ADD.value)
