@@ -61,7 +61,7 @@ MAIN_MENU
 '''
 def main_menu(chat, diets=None, kcal_consumpted=None, kcal_daily=None):
 	reply_keyboard = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
-	buttons = [config.Menu_RU.MEAL.value,config.Menu_RU.RECOMENDATIONS.value,config.Menu_RU.WEIGHT.value,config.Menu_RU.ABOUT.value,config.Menu_RU.SETTINGS.value]
+	buttons = [config.Menu_RU.RECOMENDATIONS.value,config.Menu_RU.MEAL.value,config.Menu_RU.ABOUT.value]
 	for button in buttons:
 		reply_keyboard.add(button)
 	message = translation["rus"].text_main_menu
