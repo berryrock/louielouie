@@ -39,6 +39,11 @@ def callback_handler(call, dbhelper, uihelper, backend):
                 dbhelper.set_step(call.message.chat.id, config.Step.MEAL_INFO.value)
                 dish_data = dbhelper.get_data(call.message.chat.id, config.UserData.DISH.value)[0]
                 dish_info = backend.exact_dish(call.message.chat.id, dish_data)
+                print()
+                print()
+                print(dish_info)
+                print()
+                print()
                 uihelper.meal_info(call.message.chat.id, dish_info[0])
 
             elif call.data[:4] == 'rec_':
