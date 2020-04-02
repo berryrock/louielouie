@@ -123,7 +123,7 @@ def message_handler(message, dbhelper, uihelper, backend):
                     if dish_info[1] == True:
                         print(dish_info)
                         dbhelper.set_step(message.chat.id, config.Step.MEAL_INFO.value)
-                        dbhelper.set_data(message.chat.id, config.UserData.DISH.value, dish_info[0]["dish"])
+                        dbhelper.set_data(message.chat.id, config.UserData.DISH.value, dish_info[0]["dish"]["name"])
                         uihelper.meal_info(message.chat.id, dish_info[0])
 
                     elif dish_info[1] == False:
