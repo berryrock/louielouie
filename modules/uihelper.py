@@ -314,3 +314,10 @@ def welcome_message(chat):
 def welcome_again(chat):
 	message = translation["rus"].text_welcome
 	bot.send_message(chat, message)
+
+
+
+
+def shut_down(chat):
+	message = translation["rus"].text_shot_down
+	bot.send_message(chat, message)

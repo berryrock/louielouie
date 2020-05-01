@@ -2,7 +2,8 @@ import config
 from json.decoder import JSONDecodeError
 
 def callback_handler(call, dbhelper, uihelper, backend):
-    step = dbhelper.get_step(call.message.chat.id)[0]
+    uihelper.shut_down(message.chat.id)
+    '''step = dbhelper.get_step(call.message.chat.id)[0]
     print(step)
     previous_calls = dbhelper.get_call(call.message.chat.id)
     print('previous calls', previous_calls)
@@ -175,4 +176,4 @@ def callback_handler(call, dbhelper, uihelper, backend):
         except JSONDecodeError:
             dbhelper.set_step(call.message.chat.id, config.Step.MAIN_MENU.value)
             uihelper.error_message(call.message.chat.id)
-            uihelper.main_menu(call.message.chat.id)
+            uihelper.main_menu(call.message.chat.id)'''

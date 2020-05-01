@@ -74,6 +74,8 @@ class Message():
     text_meal_history_navigation = "Here is all added meals for 7 days period"
     text_meal_deleted = "Meal will be deleted"
 
+    text_shot_down = "I'm done :(\nAt that moment servers of Mealmapp is turned down.\n\nBut that wont be forever. Big update coming out soon\nStay tuned and look for a news on our Telegram channel https://t.me/mealmapp\n\nSee you really soon!"
+
     edit_personal = {"weight": "weight", "lenght": "lenght", "birthday": "birthday", "name": "name"}
 
 class RussianTranslation(Message):

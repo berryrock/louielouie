@@ -2,7 +2,8 @@ import config
 from json.decoder import JSONDecodeError
 
 def message_handler(message, dbhelper, uihelper, backend):
-    try:
+    uihelper.shut_down(message.chat.id)
+    '''try:
         step = dbhelper.get_step(message.chat.id)[0]
         dbhelper.clear_call(message.chat.id)
 
@@ -155,4 +156,4 @@ def message_handler(message, dbhelper, uihelper, backend):
             backend.add_user(message.chat.id)
             dbhelper.set_step(message.chat.id, config.Step.MAIN_MENU.value)
             uihelper.welcome_message(message.chat.id)
-            uihelper.main_menu(message.chat.id)
+            uihelper.main_menu(message.chat.id)'''
