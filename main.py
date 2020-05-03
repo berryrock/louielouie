@@ -58,7 +58,8 @@ def cmd_start(message):
 	print()
 	print('start', message.chat.id)
 	print(str(datetime.datetime.now()), message.text)
-	uihelper.first_step(message.chat.id)
+	uihelper.shut_down(message.chat.id)
+	#uihelper.first_step(message.chat.id)
 
 
 
@@ -67,9 +68,11 @@ def cmd_reset(message):
 	print()
 	print('reset', message.chat.id)
 	print(str(datetime.datetime.now()), message.text)
+	uihelper.shut_down(message.chat.id)
+	'''
 	dbhelper.set_step(message.chat.id, config.Step.MAIN_MENU.value)
 	uihelper.welcome_again(message.chat.id)
-	uihelper.main_menu(message.chat.id)
+	uihelper.main_menu(message.chat.id)'''
 
 
 
@@ -144,7 +147,8 @@ def answer_to_user(message):
 	print()
 	print('text', message.chat.id)
 	print(str(datetime.datetime.now()), message.text)
-	message_handler(message, dbhelper, uihelper, backend)
+	uihelper.shut_down(message.chat.id)
+	'''message_handler(message, dbhelper, uihelper, backend)'''
 
 
 
@@ -153,7 +157,8 @@ def callback_inline(call):
 	print()
 	print('call', call.message.chat.id)
 	print(str(datetime.datetime.now()), call.data)
-	callback_handler(call, dbhelper, uihelper, backend)
+	uihelper.shut_down(call.message.chat.id)
+	'''callback_handler(call, dbhelper, uihelper, backend)'''
 
 
 # Remove webhook, it fails sometimes the set if there is a previous webhook

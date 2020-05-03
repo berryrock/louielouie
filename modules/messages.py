@@ -148,6 +148,8 @@ class RussianTranslation(Message):
     text_meal_history_navigation = "История приемов пищи за период 7 дней"
     text_meal_deleted = "Прием пищи будет удален"
 
+    text_shot_down = "Я все :(\nВ данный момент сервера Mealmapp отключены. Но это не продлится вечно. Грядет большое обновление.\n\nОставайтесь на связи и читайте новости в нашем Telegram канале https://t.me/mealmapp\n\nСкоро увидимся"
+
     edit_personal = {"weight": "вес", "lenght": "рост", "birthday": "день рождения", "name": "имя"}
 
 russian = RussianTranslation()
